@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
+
+//Packages
 import 'package:firebase_core/firebase_core.dart';
+import 'package:get_it/get_it.dart';
+
+//Pages
+import '../services/navigation_services.dart';
 
 class SplashPage extends StatefulWidget {
   final VoidCallback onInitializationComplete;
@@ -53,5 +59,9 @@ class _SplashPageState extends State<SplashPage> {
     _registerServices();
   }
 
-  void _registerServices() {}
+  void _registerServices() {
+    GetIt.instance.registerSingleton<NavigationService>(
+      NavigationService(),
+    );
+  }
 }
