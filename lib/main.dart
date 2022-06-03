@@ -8,6 +8,7 @@ import './services/navigation_service.dart';
 
 //Pages
 import './pages/splash_page.dart';
+import './pages/login_page.dart';
 
 void main() {
   runApp(
@@ -36,7 +37,11 @@ class MainApp extends StatelessWidget {
           backgroundColor: Color.fromARGB(255, 178, 11, 184),
         ),
       ),
-      // navigatorKey: NavigationService.navigatorKey,
+      navigatorKey: NavigationService.navigatorKey,
+      initialRoute: '/login',
+      routes: {
+        '/login': (BuildContext _context) => LoginPage(),
+      },
     );
   }
 }
