@@ -1,6 +1,5 @@
+//packages
 import 'package:flutter/material.dart';
-
-//Packages
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:provider/provider.dart';
 
@@ -13,6 +12,10 @@ import './providers/authentication_provider.dart';
 //Pages
 import './pages/splash_page.dart';
 import './pages/login_page.dart';
+import './pages/home_page.dart';
+
+//Constants
+import 'routes.dart';
 
 void main() {
   runApp(
@@ -48,9 +51,10 @@ class MainApp extends StatelessWidget {
           ),
         ),
         navigatorKey: NavigationService.navigatorKey,
-        initialRoute: '/login',
+        initialRoute: Routes.loginPage,
         routes: {
-          '/login': (BuildContext _context) => const LoginPage(),
+          Routes.loginPage: (BuildContext _context) => const LoginPage(),
+          Routes.homePage: (BuildContext _context) => HomePage(),
         },
       ),
     );

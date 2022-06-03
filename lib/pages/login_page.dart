@@ -59,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
           children: [
             _pageTitle(),
             SizedBox(
-              height: _deviceHeigth * 0.04,
+              height: _deviceHeigth * 0.05,
             ),
             _loginForm(),
             SizedBox(
@@ -67,7 +67,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             _loginButton(),
             SizedBox(
-              height: _deviceHeigth * 0.02,
+              height: _deviceHeigth * 0.03,
             ),
             _registerAccountLink(),
           ],
@@ -77,7 +77,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _pageTitle() {
-    return SizedBox(
+    return Container(
       height: _deviceHeigth * 0.10,
       child: const Text(
         'Messenger',
@@ -88,7 +88,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _loginForm() {
-    return SizedBox(
+    return Container(
       height: _deviceHeigth * 0.18,
       child: Form(
         key: _loginFormKey,
