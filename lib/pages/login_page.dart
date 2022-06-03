@@ -1,6 +1,12 @@
+//Packages
 import 'package:flutter/material.dart';
 
+//Widgets
+import '../widgets/custom_input_field.dart';
+
 class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() {
     return _LoginPageState();
@@ -10,6 +16,8 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   late double _deviceHeigth;
   late double _deviceWidth;
+
+  final _loginFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +41,7 @@ class _LoginPageState extends State<LoginPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             _pageTitle(),
+            _loginForm(),
           ],
         ),
       ),
@@ -40,12 +49,39 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _pageTitle() {
-    return Container(
+    return SizedBox(
       height: _deviceHeigth * 0.10,
       child: const Text(
         'Messenger',
         style: TextStyle(
             color: Colors.white, fontSize: 40, fontWeight: FontWeight.w600),
+      ),
+    );
+  }
+
+  Widget _loginForm() {
+    return SizedBox(
+      height: _deviceHeigth * 0.18,
+      child: Form(
+        key: _loginFormKey,
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            CustomTextFormField(
+                onSaved: (_value) {},
+                regEx:
+                    r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
+                hintText: 'Email',
+                obscureText: false),
+            CustomTextFormField(
+                onSaved: (_value) {},
+                regEx: r".{8,}",
+                hintText: 'Password',
+                obscureText: false),
+          ],
+        ),
       ),
     );
   }
