@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 
 //Packages
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:provider/provider.dart';
 
 //Services
 import './services/navigation_service.dart';
+
+//Providers
+import './providers/authentication_provider.dart';
 
 //Pages
 import './pages/splash_page.dart';
@@ -28,20 +32,27 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Messenger',
-      theme: ThemeData(
-        backgroundColor: const Color.fromARGB(255, 112, 196, 168),
-        scaffoldBackgroundColor: const Color.fromARGB(255, 37, 158, 189),
-        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-          backgroundColor: Color.fromARGB(255, 178, 11, 184),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<AuthenticationProvider>(
+          create: (BuildContext context) => AuthenticationProvider(),
+        )
+      ],
+      child: MaterialApp(
+        title: 'Messenger',
+        theme: ThemeData(
+          backgroundColor: const Color.fromARGB(255, 112, 196, 168),
+          scaffoldBackgroundColor: const Color.fromARGB(255, 37, 158, 189),
+          bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+            backgroundColor: Color.fromARGB(255, 178, 11, 184),
+          ),
         ),
+        navigatorKey: NavigationService.navigatorKey,
+        initialRoute: '/login',
+        routes: {
+          '/login': (BuildContext _context) => const LoginPage(),
+        },
       ),
-      navigatorKey: NavigationService.navigatorKey,
-      initialRoute: '/login',
-      routes: {
-        '/login': (BuildContext _context) => LoginPage(),
-      },
     );
   }
 }

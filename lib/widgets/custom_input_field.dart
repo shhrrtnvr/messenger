@@ -25,7 +25,7 @@ class CustomTextFormField extends StatelessWidget {
         return RegExp(regEx).hasMatch(_value!) ? null : 'Enter a valid value';
       },
       decoration: InputDecoration(
-        fillColor: Color.fromARGB(16, 37, 255, 233),
+        fillColor: const Color.fromARGB(16, 37, 255, 233),
         filled: true,
         border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10.0),
