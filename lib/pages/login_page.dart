@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 //Widgets
 import '../widgets/custom_input_field.dart';
+import '../widgets/rounded_button.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -41,7 +42,14 @@ class _LoginPageState extends State<LoginPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             _pageTitle(),
+            SizedBox(
+              height: _deviceHeigth * 0.04,
+            ),
             _loginForm(),
+            SizedBox(
+              height: _deviceHeigth * 0.05,
+            ),
+            _loginButton()
           ],
         ),
       ),
@@ -84,5 +92,13 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  Widget _loginButton() {
+    return RoundedButton(
+        name: 'Login',
+        height: _deviceHeigth * 0.065,
+        width: _deviceWidth * 0.4,
+        onPressed: () {});
   }
 }

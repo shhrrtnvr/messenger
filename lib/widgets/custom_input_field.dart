@@ -6,8 +6,7 @@ class CustomTextFormField extends StatelessWidget {
   final String hintText;
   final bool obscureText;
 
-  // ignore: prefer_const_constructors_in_immutables
-  CustomTextFormField(
+  const CustomTextFormField(
       {Key? key,
       required this.onSaved,
       required this.regEx,
@@ -26,7 +25,7 @@ class CustomTextFormField extends StatelessWidget {
         return RegExp(regEx).hasMatch(_value!) ? null : 'Enter a valid value';
       },
       decoration: InputDecoration(
-        fillColor: Color.fromARGB(45, 255, 37, 157),
+        fillColor: Color.fromARGB(16, 37, 255, 233),
         filled: true,
         border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10.0),
