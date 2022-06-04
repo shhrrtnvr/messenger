@@ -16,6 +16,8 @@ import '../widgets/rounded_button.dart';
 import '../widgets/rounded_image.dart';
 
 class RegisterPage extends StatefulWidget {
+  const RegisterPage({Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() {
     return _RegisterPageState();

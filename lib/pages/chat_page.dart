@@ -108,14 +108,24 @@ class _ChatPageState extends State<ChatPage> {
 
   Widget _messageListView() {
     if (_pageProvider.messages != null) {
-      if (_pageProvider.messages!.length != 0) {
+      if (_pageProvider.messages!.isNotEmpty) {
         return Container(
           height: _deviceHeight * 0.74,
           child: ListView.builder(
             itemCount: _pageProvider.messages!.length,
             itemBuilder: (BuildContext _context, int _idx) {
+              ChatMessage _message = _pageProvider.messages![_idx];
+              bool _isOwnMessage = _message.senderID == _auth.user.uid;
               return Container(
-                child: Text(_pageProvider.messages![_idx].content),
+                child: CustomChatListViewTile(
+                  deviceHeight: _deviceHeight,
+                  width: _deviceWidth * 0.80,
+                  message: _message,
+                  isOwnMessage: _isOwnMessage,
+                  sender: widget.chat.members
+                      .where((_member) => _member.uid == _message.senderID)
+                      .first,
+                ),
               );
             },
           ),
