@@ -48,7 +48,7 @@ class MainApp extends StatelessWidget {
           backgroundColor: const Color.fromARGB(255, 112, 196, 168),
           scaffoldBackgroundColor: const Color.fromARGB(255, 37, 158, 189),
           bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-            backgroundColor: Color.fromARGB(255, 178, 11, 184),
+            backgroundColor: Color.fromARGB(187, 82, 136, 161),
           ),
         ),
         navigatorKey: NavigationService.navigatorKey,
