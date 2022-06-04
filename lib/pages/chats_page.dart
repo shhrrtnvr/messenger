@@ -8,8 +8,11 @@ import '../providers/authentication_provider.dart';
 
 //Widgets
 import '../widgets/top_bar.dart';
+import '../widgets/custom_list_view_tiles.dart';
 
 class ChatsPage extends StatefulWidget {
+  const ChatsPage({Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() {
     return _ChatsPageState();
@@ -44,7 +47,7 @@ class _ChatsPageState extends State<ChatsPage> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           TopBar(
-            "Charts",
+            "Chats",
             primaryAction: IconButton(
               icon: const Icon(
                 Icons.logout,
@@ -55,8 +58,27 @@ class _ChatsPageState extends State<ChatsPage> {
               },
             ),
           ),
+          _chatTile(),
         ],
       ),
+    );
+  }
+
+  Widget _chatsList() {
+    return Expanded(
+      child: _chatTile(),
+    );
+  }
+
+  Widget _chatTile() {
+    return CustomListViewTileWithActivity(
+      height: _deviceHeight * 0.10,
+      title: "New Chat",
+      subtitle: "hello",
+      imagePath: "https://i.pravatar.cc/300",
+      isActive: true,
+      isActivity: true,
+      onTap: () {},
     );
   }
 }
