@@ -10,6 +10,22 @@ class DatabaseService {
 
   DatabaseService();
 
+  Future<void> createUser(
+      String _uid, String _email, String _name, String _imageUrl) async {
+    try {
+      await _db.collection(userCollection).doc(_uid).set(
+        {
+          "email": _email,
+          "image": _imageUrl,
+          "last_active": DateTime.now().toUtc(),
+          "name": _name,
+        },
+      );
+    } catch (e) {
+      print(e);
+    }
+  }
+
   Future<DocumentSnapshot> getUser(String _uid) {
     return _db.collection(userCollection).doc(_uid).get();
   }

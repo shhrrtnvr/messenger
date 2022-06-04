@@ -13,6 +13,7 @@ import './providers/authentication_provider.dart';
 import './pages/splash_page.dart';
 import './pages/login_page.dart';
 import './pages/home_page.dart';
+import './pages/register_page.dart';
 
 //Constants
 import 'routes.dart';
@@ -54,6 +55,7 @@ class MainApp extends StatelessWidget {
         initialRoute: Routes.loginPage,
         routes: {
           Routes.loginPage: (BuildContext _context) => const LoginPage(),
+          Routes.registerPage: (BuildContext _context) => RegisterPage(),
           Routes.homePage: (BuildContext _context) => HomePage(),
         },
       ),

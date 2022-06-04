@@ -1,5 +1,6 @@
 //Packages
 import 'package:flutter/material.dart';
+import 'package:messenger/routes.dart';
 import 'package:provider/provider.dart';
 import 'package:get_it/get_it.dart';
 
@@ -23,7 +24,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  late double _deviceHeigth;
+  late double _deviceHeight;
   late double _deviceWidth;
 
   late AuthenticationProvider _auth;
@@ -36,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    _deviceHeigth = MediaQuery.of(context).size.height;
+    _deviceHeight = MediaQuery.of(context).size.height;
     _deviceWidth = MediaQuery.of(context).size.width;
     _auth = Provider.of<AuthenticationProvider>(context);
     _navigation = GetIt.instance.get<NavigationService>();
@@ -45,12 +46,13 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _buildUI() {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Container(
         padding: EdgeInsets.symmetric(
           horizontal: _deviceWidth * 0.03,
-          vertical: _deviceHeigth * 0.02,
+          vertical: _deviceHeight * 0.02,
         ),
-        height: _deviceHeigth * 0.98,
+        height: _deviceHeight * 0.98,
         width: _deviceWidth * 0.97,
         child: Column(
           mainAxisSize: MainAxisSize.max,
@@ -59,15 +61,15 @@ class _LoginPageState extends State<LoginPage> {
           children: [
             _pageTitle(),
             SizedBox(
-              height: _deviceHeigth * 0.05,
+              height: _deviceHeight * 0.05,
             ),
             _loginForm(),
             SizedBox(
-              height: _deviceHeigth * 0.05,
+              height: _deviceHeight * 0.05,
             ),
             _loginButton(),
             SizedBox(
-              height: _deviceHeigth * 0.03,
+              height: _deviceHeight * 0.03,
             ),
             _registerAccountLink(),
           ],
@@ -78,7 +80,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _pageTitle() {
     return Container(
-      height: _deviceHeigth * 0.10,
+      height: _deviceHeight * 0.10,
       child: const Text(
         'Messenger',
         style: TextStyle(
@@ -89,7 +91,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _loginForm() {
     return Container(
-      height: _deviceHeigth * 0.18,
+      height: _deviceHeight * 0.18,
       child: Form(
         key: _loginFormKey,
         child: Column(
@@ -98,24 +100,26 @@ class _LoginPageState extends State<LoginPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             CustomTextFormField(
-                onSaved: (_value) {
-                  setState(() {
-                    _email = _value;
-                  });
-                },
-                regEx:
-                    r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
-                hintText: 'Email',
-                obscureText: false),
+              onSaved: (_value) {
+                setState(() {
+                  _email = _value;
+                });
+              },
+              regEx:
+                  r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
+              hintText: 'Email',
+              obscureText: false,
+            ),
             CustomTextFormField(
-                onSaved: (_value) {
-                  setState(() {
-                    _password = _value;
-                  });
-                },
-                regEx: r".{6,}",
-                hintText: 'Password',
-                obscureText: false),
+              onSaved: (_value) {
+                setState(() {
+                  _password = _value;
+                });
+              },
+              regEx: r".{6,}",
+              hintText: 'Password',
+              obscureText: false,
+            ),
           ],
         ),
       ),
@@ -125,7 +129,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget _loginButton() {
     return RoundedButton(
         name: 'Login',
-        height: _deviceHeigth * 0.065,
+        height: _deviceHeight * 0.065,
         width: _deviceWidth * 0.4,
         onPressed: () {
           if (_loginFormKey.currentState!.validate()) {
@@ -137,11 +141,11 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _registerAccountLink() {
     return GestureDetector(
-      onTap: () {},
+      onTap: () => _navigation.navigateToRoute(Routes.registerPage),
       child: const Text(
-        'Don\'t have and account?',
+        'Don\'t have an account?',
         style: TextStyle(
-          color: Colors.amber,
+          color: Color.fromARGB(255, 233, 252, 18),
         ),
       ),
     );
