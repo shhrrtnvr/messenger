@@ -30,7 +30,7 @@ class _ChatPageState extends State<ChatPage> {
   late double _deviceWidth;
 
   late AuthenticationProvider _auth;
-  late ChatPageProvider _pageProvider;
+  late ChatProvider _pageProvider;
 
   late GlobalKey<FormState> _messageFormState;
   late ScrollController _scrollController;
@@ -51,9 +51,9 @@ class _ChatPageState extends State<ChatPage> {
 
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<ChatPageProvider>(
+        ChangeNotifierProvider<ChatProvider>(
           create: (context) =>
-              ChatPageProvider(widget.chat.uid, _auth, _scrollController),
+              ChatProvider(widget.chat.uid, _auth, _scrollController),
         ),
       ],
       child: _buildUI(),
@@ -63,7 +63,7 @@ class _ChatPageState extends State<ChatPage> {
   Widget _buildUI() {
     return Builder(
       builder: (BuildContext _context) {
-        _pageProvider = _context.watch<ChatPageProvider>();
+        _pageProvider = _context.watch<ChatProvider>();
         return Scaffold(
           body: SingleChildScrollView(
             child: Container(
@@ -96,6 +96,7 @@ class _ChatPageState extends State<ChatPage> {
                       onPressed: () {},
                     ),
                   ),
+                  _messageListView(),
                 ],
               ),
             ),
@@ -103,5 +104,37 @@ class _ChatPageState extends State<ChatPage> {
         );
       },
     );
+  }
+
+  Widget _messageListView() {
+    if (_pageProvider.messages != null) {
+      if (_pageProvider.messages!.length != 0) {
+        return Container(
+          height: _deviceHeight * 0.74,
+          child: ListView.builder(
+            itemCount: _pageProvider.messages!.length,
+            itemBuilder: (BuildContext _context, int _idx) {
+              return Container(
+                child: Text(_pageProvider.messages![_idx].content),
+              );
+            },
+          ),
+        );
+      } else {
+        return const Align(
+          alignment: Alignment.center,
+          child: Text(
+            'Say Hi!',
+            style: TextStyle(color: Colors.white),
+          ),
+        );
+      }
+    } else {
+      return const Center(
+        child: CircularProgressIndicator(
+          color: Colors.white,
+        ),
+      );
+    }
   }
 }
