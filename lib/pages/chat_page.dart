@@ -1,5 +1,6 @@
 //Packages
 import 'package:flutter/material.dart';
+import 'package:messenger/widgets/custom_input_field.dart';
 import 'package:provider/provider.dart';
 
 //Widgets
@@ -97,6 +98,7 @@ class _ChatPageState extends State<ChatPage> {
                     ),
                   ),
                   _messageListView(),
+                  _sendMessageForm()
                 ],
               ),
             ),
@@ -146,5 +148,87 @@ class _ChatPageState extends State<ChatPage> {
         ),
       );
     }
+  }
+
+  Widget _sendMessageForm() {
+    return Container(
+      height: _deviceHeight * 0.06,
+      decoration: BoxDecoration(
+        color: Color.fromARGB(199, 85, 151, 221),
+        borderRadius: BorderRadius.circular(100),
+      ),
+      margin: EdgeInsets.symmetric(
+        horizontal: _deviceWidth * 0.04,
+        vertical: _deviceHeight * 0.03,
+      ),
+      child: Form(
+        key: _messageFormState,
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            _messageTextField(),
+            _sendMessageButton(),
+            _imageMessageButton(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _messageTextField() {
+    return SizedBox(
+      width: _deviceWidth * 0.65,
+      child: CustomTextFormField(
+        onSaved: (_value) {
+          _pageProvider.message = _value;
+        },
+        regEx: r"^(?!\s*$).+",
+        hintText: 'Type a message',
+        obscureText: false,
+      ),
+    );
+  }
+
+  Widget _sendMessageButton() {
+    double _size = _deviceHeight * 0.04;
+    return Container(
+      height: _size,
+      width: _size,
+      child: IconButton(
+        icon: const Icon(
+          Icons.send,
+          color: Colors.white,
+        ),
+        onPressed: () {
+          if (_messageFormState.currentState!.validate()) {
+            _messageFormState.currentState!.save();
+            _pageProvider.sendTextMessage();
+            _messageFormState.currentState!.reset();
+          }
+        },
+      ),
+    );
+  }
+
+  Widget _imageMessageButton() {
+    double _size = _deviceHeight * 0.04;
+    return Container(
+      height: _size,
+      width: _size,
+      child: FloatingActionButton(
+        backgroundColor: const Color.fromRGBO(
+          0,
+          82,
+          218,
+          1.0,
+        ),
+        onPressed: () {
+          _pageProvider.sendImageMessage();
+        },
+        child: const Icon(Icons.camera_enhance),
+      ),
+    );
   }
 }

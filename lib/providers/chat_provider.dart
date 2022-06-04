@@ -34,8 +34,12 @@ class ChatProvider extends ChangeNotifier {
 
   String? _message;
 
-  String? get message {
-    return _message;
+  String get message {
+    return _message ?? "";
+  }
+
+  set message(String _value) {
+    _message = _value;
   }
 
   // void set message(String _value) {
