@@ -69,6 +69,7 @@ class ChatProvider extends ChangeNotifier {
                 _message.data() as Map<String, dynamic>;
             return ChatMessage.fromJSON(_messageData);
           }).toList();
+          _messages.sort((a, b) => a.sentTime.compareTo(b.sentTime));
           messages = _messages;
           notifyListeners();
         },
@@ -99,7 +100,7 @@ class ChatProvider extends ChangeNotifier {
             _chatID, _auth.user.uid, _file);
         ChatMessage _messageToSend = ChatMessage(
           content: _downloadURL!,
-          type: MessageType.text,
+          type: MessageType.image,
           senderID: _auth.user.uid,
           sentTime: DateTime.now(),
         );
