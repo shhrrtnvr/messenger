@@ -1,9 +1,8 @@
 //Packages
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-const String userCollection = "Users";
-const String chatCollection = "Chats";
-const String messagesCollection = "Messages";
+//Constants
+import '../constants/db_fields.dart';
 
 class DatabaseService {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
@@ -13,12 +12,12 @@ class DatabaseService {
   Future<void> createUser(
       String _uid, String _email, String _name, String _imageUrl) async {
     try {
-      await _db.collection(userCollection).doc(_uid).set(
+      await _db.collection(DBCollections.userCollection).doc(_uid).set(
         {
-          "email": _email,
-          "image": _imageUrl,
-          "last_active": DateTime.now().toUtc(),
-          "name": _name,
+          UserFields.email: _email,
+          UserFields.imageUrl: _imageUrl,
+          UserFields.lastActive: DateTime.now().toUtc(),
+          UserFields.name: _name,
         },
       );
     } catch (e) {
@@ -27,15 +26,32 @@ class DatabaseService {
   }
 
   Future<DocumentSnapshot> getUser(String _uid) {
-    return _db.collection(userCollection).doc(_uid).get();
+    return _db.collection(DBCollections.userCollection).doc(_uid).get();
+  }
+
+  Stream<QuerySnapshot> getChatsForUser(String _uid) {
+    return _db
+        .collection(DBCollections.chatCollection)
+        .where(ChatFields.members, arrayContains: _uid)
+        .snapshots();
+  }
+
+  Future<QuerySnapshot> getLastMessageForChat(String _chatID) {
+    return _db
+        .collection(DBCollections.chatCollection)
+        .doc(_chatID)
+        .collection(DBCollections.messagesCollection)
+        .orderBy(MessageFields.sentTime, descending: true)
+        .limit(1)
+        .get();
   }
 
   Future<void> updateUserLastSeenTime(String _uid) async {
     try {
       await _db
-          .collection(userCollection)
+          .collection(DBCollections.userCollection)
           .doc(_uid)
-          .update({"last_active": DateTime.now().toUtc()});
+          .update({UserFields.lastActive: DateTime.now().toUtc()});
     } catch (e) {
       print(e.toString());
     }

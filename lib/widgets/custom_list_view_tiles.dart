@@ -15,7 +15,7 @@ class CustomListViewTileWithActivity extends StatelessWidget {
   final String subtitle;
   final String imagePath;
   final bool isActive;
-  final bool isActivity;
+  final bool hasActivity;
   final Function onTap;
 
   const CustomListViewTileWithActivity({
@@ -25,7 +25,7 @@ class CustomListViewTileWithActivity extends StatelessWidget {
     required this.subtitle,
     required this.imagePath,
     required this.isActive,
-    required this.isActivity,
+    required this.hasActivity,
     required this.onTap,
   }) : super(key: key);
 
@@ -48,7 +48,7 @@ class CustomListViewTileWithActivity extends StatelessWidget {
           fontWeight: FontWeight.w500,
         ),
       ),
-      subtitle: isActivity
+      subtitle: hasActivity
           ? Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.start,

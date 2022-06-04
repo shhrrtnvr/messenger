@@ -16,7 +16,7 @@ import './pages/home_page.dart';
 import './pages/register_page.dart';
 
 //Constants
-import 'routes.dart';
+import 'constants/routes.dart';
 
 void main() {
   runApp(
