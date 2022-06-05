@@ -72,6 +72,14 @@ class ChatProvider extends ChangeNotifier {
           _messages.sort((a, b) => a.sentTime.compareTo(b.sentTime));
           messages = _messages;
           notifyListeners();
+          WidgetsBinding.instance!.addPostFrameCallback(
+            (timeStamp) {
+              if (_scrollController.hasClients) {
+                _scrollController
+                    .jumpTo(_scrollController.position.maxScrollExtent);
+              }
+            },
+          );
         },
       );
     } catch (e) {
