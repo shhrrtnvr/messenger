@@ -28,6 +28,16 @@ class DatabaseService {
     }
   }
 
+  Future<QuerySnapshot> getUsers({String? name}) {
+    Query _query = _db.collection(DBCollections.userCollection);
+    if (name != null) {
+      _query = _query
+          .where(UserFields.name, isGreaterThanOrEqualTo: name)
+          .where(UserFields.name, isLessThanOrEqualTo: name + "z");
+    }
+    return _query.get();
+  }
+
   Future<DocumentSnapshot> getUser(String _uid) {
     return _db.collection(DBCollections.userCollection).doc(_uid).get();
   }
@@ -98,6 +108,16 @@ class DatabaseService {
   Future<void> deleteChat(String _chatID) async {
     try {
       await _db.collection(DBCollections.chatCollection).doc(_chatID).delete();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<DocumentReference?> createChat(Map<String, dynamic> _data) async {
+    try {
+      DocumentReference _chat =
+          await _db.collection(DBCollections.chatCollection).add(_data);
+      return _chat;
     } catch (e) {
       print(e);
     }

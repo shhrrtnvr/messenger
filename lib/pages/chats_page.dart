@@ -36,7 +36,7 @@ class _ChatsPageState extends State<ChatsPage> {
   late double _deviceWidth;
 
   late AuthenticationProvider _auth;
-  late ChatsPageProvider _pageProvider;
+  late ChatsProvider _chatsProvider;
   late NavigationService _navigation;
 
   @override
@@ -48,8 +48,8 @@ class _ChatsPageState extends State<ChatsPage> {
 
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<ChatsPageProvider>(
-          create: (_) => ChatsPageProvider(_auth),
+        ChangeNotifierProvider<ChatsProvider>(
+          create: (_) => ChatsProvider(_auth),
         ),
       ],
       child: _buildUI(),
@@ -59,7 +59,7 @@ class _ChatsPageState extends State<ChatsPage> {
   Widget _buildUI() {
     return Builder(
       builder: (BuildContext _context) {
-        _pageProvider = _context.watch<ChatsPageProvider>();
+        _chatsProvider = _context.watch<ChatsProvider>();
         return Container(
           padding: EdgeInsets.symmetric(
             horizontal: _deviceWidth * 0.03,
@@ -93,7 +93,7 @@ class _ChatsPageState extends State<ChatsPage> {
   }
 
   Widget _chatsList() {
-    List<Chat>? _chats = _pageProvider.chats;
+    List<Chat>? _chats = _chatsProvider.chats;
     print(_chats ?? "Not present");
     return Expanded(
       child: (() {

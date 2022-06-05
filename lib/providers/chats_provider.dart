@@ -17,7 +17,7 @@ import '../models/chat.dart';
 import '../models/chat_message.dart';
 import '../models/chat_user.dart';
 
-class ChatsPageProvider extends ChangeNotifier {
+class ChatsProvider extends ChangeNotifier {
   AuthenticationProvider _auth;
   late DatabaseService _db;
 
@@ -25,7 +25,7 @@ class ChatsPageProvider extends ChangeNotifier {
 
   late StreamSubscription _chatsStream;
 
-  ChatsPageProvider(this._auth) {
+  ChatsProvider(this._auth) {
     _db = GetIt.instance.get<DatabaseService>();
     getChats();
   }
