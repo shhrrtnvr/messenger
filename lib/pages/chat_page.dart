@@ -87,14 +87,18 @@ class _ChatPageState extends State<ChatPage> {
                         Icons.delete,
                         color: Color.fromRGBO(0, 92, 218, 1.0),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        _pageProvider.deleteChat();
+                      },
                     ),
                     secondaryAction: IconButton(
                       icon: const Icon(
                         Icons.arrow_back,
                         color: Color.fromRGBO(0, 82, 221, 1.0),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        _pageProvider.goBack();
+                      },
                     ),
                   ),
                   _messageListView(),
