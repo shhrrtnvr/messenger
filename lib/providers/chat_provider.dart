@@ -18,6 +18,9 @@ import '../providers/authentication_provider.dart';
 //Models
 import '../models/chat_message.dart';
 
+//Constants
+import '../constants/db_fields.dart';
+
 class ChatProvider extends ChangeNotifier {
   late DatabaseService _db;
   late CloudStorageService _storage;
@@ -31,6 +34,8 @@ class ChatProvider extends ChangeNotifier {
   List<ChatMessage>? messages;
 
   late StreamSubscription _messagesStream;
+  late StreamSubscription _keyboardVisibilityStream;
+  late KeyboardVisibilityController _keyboardVisibilityController;
 
   String? _message;
 
@@ -51,7 +56,9 @@ class ChatProvider extends ChangeNotifier {
     _storage = GetIt.instance.get<CloudStorageService>();
     _media = GetIt.instance.get<MediaService>();
     _navigation = GetIt.instance.get<NavigationService>();
+    _keyboardVisibilityController = KeyboardVisibilityController();
     listenToMessages();
+    listenToKeyboardChanges();
   }
 
   @override
@@ -86,6 +93,16 @@ class ChatProvider extends ChangeNotifier {
       print('Error getting messages');
       print(e);
     }
+  }
+
+  void listenToKeyboardChanges() {
+    _keyboardVisibilityStream =
+        _keyboardVisibilityController.onChange.listen((_event) {
+      _db.updateChatData(
+        _chatID,
+        {ChatFields.hasActivity: _event},
+      );
+    });
   }
 
   void sendTextMessage() {
