@@ -38,7 +38,7 @@ class CustomTextFormField extends StatelessWidget {
 }
 
 class CustomTextField extends StatelessWidget {
-  final Function(String) onEditingComplete;
+  final Function(String) onUpdate;
   final String hintText;
   final bool obscureText;
   final TextEditingController controller;
@@ -46,7 +46,7 @@ class CustomTextField extends StatelessWidget {
 
   CustomTextField(
       {Key? key,
-      required this.onEditingComplete,
+      required this.onUpdate,
       required this.hintText,
       required this.obscureText,
       required this.controller,
@@ -57,7 +57,7 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       controller: controller,
-      onEditingComplete: () => onEditingComplete(controller.value.text),
+      onChanged: (text) => onUpdate(text),
       cursorColor: Colors.white,
       style: const TextStyle(color: Colors.white),
       obscureText: obscureText,
