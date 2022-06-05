@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class TopBar extends StatelessWidget {
-  String _barTitle;
+  final String _barTitle;
   Widget? primaryAction;
   Widget? secondaryAction;
   double? fontSize;

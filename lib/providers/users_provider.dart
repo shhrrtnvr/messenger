@@ -18,7 +18,7 @@ import '../models/chat.dart';
 import '../pages/chat_page.dart';
 
 class UsersProvider extends ChangeNotifier {
-  AuthenticationProvider _auth;
+  final AuthenticationProvider _auth;
 
   late DatabaseService _database;
   late NavigationService _navigation;
@@ -57,9 +57,7 @@ class UsersProvider extends ChangeNotifier {
           notifyListeners();
         },
       );
-    } catch (e) {
-      print("Error getting users.");
-      print(e);
+    } catch (_) {
     }
   }
 
@@ -111,9 +109,7 @@ class UsersProvider extends ChangeNotifier {
       _selectedUsers = [];
       notifyListeners();
       _navigation.navigateToPage(_chatPage);
-    } catch (e) {
-      print("Error creating chat.");
-      print(e);
+    } catch (_) {
     }
   }
 }

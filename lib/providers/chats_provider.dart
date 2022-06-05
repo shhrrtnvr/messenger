@@ -18,7 +18,7 @@ import '../models/chat_message.dart';
 import '../models/chat_user.dart';
 
 class ChatsProvider extends ChangeNotifier {
-  AuthenticationProvider _auth;
+  final AuthenticationProvider _auth;
   late DatabaseService _db;
 
   List<Chat>? chats;
@@ -83,9 +83,7 @@ class ChatsProvider extends ChangeNotifier {
         );
         notifyListeners();
       });
-    } catch (e) {
-      print('Error getting chats');
-      print(e);
+    } catch (_) {
     }
   }
 }

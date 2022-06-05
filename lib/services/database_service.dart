@@ -23,8 +23,7 @@ class DatabaseService {
           UserFields.name: _name,
         },
       );
-    } catch (e) {
-      print(e);
+    } catch (_) {
     }
   }
 
@@ -77,8 +76,7 @@ class DatabaseService {
           .add(
             _message.toJson(),
           );
-    } catch (e) {
-      print(e);
+    } catch (_) {
     }
   }
 
@@ -89,8 +87,7 @@ class DatabaseService {
           .collection(DBCollections.chatCollection)
           .doc(_chatID)
           .update(_data);
-    } catch (e) {
-      print(e);
+    } catch (_) {
     }
   }
 
@@ -100,16 +97,14 @@ class DatabaseService {
           .collection(DBCollections.userCollection)
           .doc(_uid)
           .update({UserFields.lastActive: DateTime.now().toUtc()});
-    } catch (e) {
-      print(e.toString());
+    } catch (_) {
     }
   }
 
   Future<void> deleteChat(String _chatID) async {
     try {
       await _db.collection(DBCollections.chatCollection).doc(_chatID).delete();
-    } catch (e) {
-      print(e);
+    } catch (_) {
     }
   }
 
@@ -118,8 +113,7 @@ class DatabaseService {
       DocumentReference _chat =
           await _db.collection(DBCollections.chatCollection).add(_data);
       return _chat;
-    } catch (e) {
-      print(e);
+    } catch (_) {
     }
   }
 }

@@ -159,7 +159,7 @@ class _ChatPageState extends State<ChatPage> {
     return Container(
       height: _deviceHeight * 0.06,
       decoration: BoxDecoration(
-        color: Color.fromARGB(199, 85, 151, 221),
+        color: const Color.fromARGB(199, 85, 151, 221),
         borderRadius: BorderRadius.circular(100),
       ),
       margin: EdgeInsets.symmetric(

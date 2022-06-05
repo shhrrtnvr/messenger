@@ -27,10 +27,10 @@ class ChatProvider extends ChangeNotifier {
   late MediaService _media;
   late NavigationService _navigation;
 
-  AuthenticationProvider _auth;
-  ScrollController _scrollController;
+  final AuthenticationProvider _auth;
+  final ScrollController _scrollController;
 
-  String _chatID;
+  final String _chatID;
   List<ChatMessage>? messages;
 
   late StreamSubscription _messagesStream;
@@ -89,9 +89,7 @@ class ChatProvider extends ChangeNotifier {
           );
         },
       );
-    } catch (e) {
-      print('Error getting messages');
-      print(e);
+    } catch (_) {
     }
   }
 
@@ -131,9 +129,7 @@ class ChatProvider extends ChangeNotifier {
         );
         _db.addMessageToChat(_chatID, _messageToSend);
       }
-    } catch (e) {
-      print('Error sending image message');
-      print(e);
+    } catch (_) {
     }
   }
 

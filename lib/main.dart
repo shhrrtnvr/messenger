@@ -1,6 +1,5 @@
 //packages
 import 'package:flutter/material.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:provider/provider.dart';
 
 //Services

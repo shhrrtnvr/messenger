@@ -21,8 +21,7 @@ class CloudStorageService {
       return await _task.then(
         (_result) => _result.ref.getDownloadURL(),
       );
-    } catch (e) {
-      print(e);
+    } catch (_) {
     }
   }
 
@@ -35,8 +34,7 @@ class CloudStorageService {
       return await _task.then(
         (_result) => _result.ref.getDownloadURL(),
       );
-    } catch (e) {
-      print(e);
+    } catch (_) {
     }
   }
 }

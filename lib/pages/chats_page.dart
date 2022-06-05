@@ -94,7 +94,6 @@ class _ChatsPageState extends State<ChatsPage> {
 
   Widget _chatsList() {
     List<Chat>? _chats = _chatsProvider.chats;
-    print(_chats ?? "Not present");
     return Expanded(
       child: (() {
         if (_chats != null) {
